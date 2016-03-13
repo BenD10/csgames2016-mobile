@@ -32,7 +32,7 @@ public class MessageControllerImpl implements MessageController {
     public void sendMessage(Context context, String userId, String text, String image, final SendMessageCallback sendMessageCallback) {
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")
-                .host(context.getString(R.string.service_host))
+                .host("97.107.131.23")
                 .port(context.getResources().getInteger(R.integer.service_port))
                 .addPathSegment(MESSAGES)
                 .build();
@@ -41,7 +41,7 @@ public class MessageControllerImpl implements MessageController {
         try {
             jsonObject.put(PARAMETER_USER_ID, userId);
             jsonObject.put(PARAMETER_TEXT, text);
-            jsonObject.put(PARAMETER_IMAGE, image);
+            jsonObject.put(PARAMETER_TEXT, text);
         } catch (JSONException e) {
             e.printStackTrace();
         }

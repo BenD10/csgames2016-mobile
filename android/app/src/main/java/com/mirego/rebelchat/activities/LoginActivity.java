@@ -124,7 +124,7 @@ public class LoginActivity extends BaseActivity {
         showLoadingIndicator(getString(R.string.message_login_progress));
         final LoginActivity self = this;
 
-        loginController.login(getApplicationContext(), textUsername.getText().toString(), new LoginController.LoginCallback() {
+        loginController.login(getApplicationContext(), textUsername.getText().toString(), textPassword.getText().toString(), new LoginController.LoginCallback() {
             @Override
             public void onLoginSuccess(final String userId) {
                 dismissLoadingIndicator(new Runnable() {
@@ -151,7 +151,7 @@ public class LoginActivity extends BaseActivity {
         showLoadingIndicator(getString(R.string.message_register_progress));
         final LoginActivity self = this;
 
-        loginController.register(getApplicationContext(), textUsername.getText().toString(), textEmail.getText().toString(), new LoginController.RegisterCallback() {
+        loginController.register(getApplicationContext(), textUsername.getText().toString(), textPassword.getText().toString(), textEmail.getText().toString(), new LoginController.RegisterCallback() {
             @Override
             public void onRegisterSuccess(final String userId) {
                 dismissLoadingIndicator(new Runnable() {
