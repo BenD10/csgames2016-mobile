@@ -3,7 +3,7 @@ var router = express.Router();
 
 /*
  * GET all messages
- */
+*/
 router.get('/', function(req, res) {
   var db = req.db;
   var collection = db.messages;
@@ -11,6 +11,7 @@ router.get('/', function(req, res) {
     res.json(docs);
   });
 });
+
 
 /*
  * GET a message
@@ -32,8 +33,20 @@ router.get('/:id', function(req, res) {
 });
 
 /*
- * Update a message
+ * Get ALL of a user's messages
  */
+
+router.get('/:user', function(req, res) {
+  var db = req.db;
+  var receiverId = req.param.recipient;
+  var collection = db.messages;
+  collection.find({"recipient":receiverId}, {}, function(e, docs) {
+    res.json(docs);
+  });
+});
+/*
+ * Update a message
+
 router.put('/:id', function(req, res) {
   var db = req.db;
   var messageId = req.params.id;
@@ -46,6 +59,8 @@ router.put('/:id', function(req, res) {
     );
   });
 });
+*/
+
 
 /*
  * Create new message
@@ -82,7 +97,7 @@ router.delete('/:id', function(req, res) {
 
 /*
  * DELETE all message
- */
+
 router.delete('/', function(req, res) {
   var db = req.db;
   var collection = db.messages;
@@ -96,5 +111,6 @@ router.delete('/', function(req, res) {
     );
   });
 });
+*/
 
 module.exports = router;
