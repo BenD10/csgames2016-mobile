@@ -14,7 +14,7 @@ public interface LoginController {
         void onRegisterFail();
     }
 
-    void login(Context context, String username, LoginCallback loginCallback);
+    void login(Context context, String username, String password, LoginCallback loginCallback);
 
-    void register(Context context, String username, String email, RegisterCallback registerCallback);
+    void register(Context context, String username, String password, String email, RegisterCallback registerCallback);
 }

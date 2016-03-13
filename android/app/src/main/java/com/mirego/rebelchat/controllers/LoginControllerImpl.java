@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -25,18 +27,20 @@ public class LoginControllerImpl implements LoginController {
 
     private final String PARAMETER_USER_ID = "_id";
     private final String PARAMETER_USERNAME = "name";
+    private final String PARAMETER_PASSWORD = "password";
     private final String PARAMETER_EMAIL = "email";
 
     private OkHttpClient client = new OkHttpClient();
 
     @Override
-    public void login(Context context, String username, final LoginCallback loginCallback) {
+    public void login(Context context, String username, String password, final LoginCallback loginCallback) {
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")
-                .host(context.getString(R.string.service_host))
-                .port(context.getResources().getInteger(R.integer.service_port))
+                .host("97.107.131.23")
+                .port(3000)
                 .addPathSegment(USERS_PATH)
                 .addQueryParameter(PARAMETER_USERNAME, username)
+                .addQueryParameter(PARAMETER_PASSWORD, md5(password))
                 .build();
 
         Request request = new Request.Builder()
@@ -66,12 +70,32 @@ public class LoginControllerImpl implements LoginController {
 
     }
 
+    public String md5(String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
     @Override
-    public void register(Context context, String username, String email, final RegisterCallback registerCallback) {
+    public void register(Context context, String username, String password, String email, final RegisterCallback registerCallback) {
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")
-                .host(context.getString(R.string.service_host))
-                .port(context.getResources().getInteger(R.integer.service_port))
+                .host("97.107.131.23")
+                .port(3000)
                 .addPathSegment(USERS_PATH)
                 .build();
 
@@ -79,6 +103,7 @@ public class LoginControllerImpl implements LoginController {
         try {
             jsonObject.put(PARAMETER_USERNAME, username);
             jsonObject.put(PARAMETER_EMAIL, email);
+            jsonObject.put(PARAMETER_PASSWORD, md5(password));
         } catch (JSONException e) {
             e.printStackTrace();
         }

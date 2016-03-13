@@ -133,6 +133,7 @@ public class MessageActivity extends BaseActivity {
         scaleTransition.addTarget(R.id.btn_logout);
         scaleTransition.addTarget(R.id.btn_shuffle);
         scaleTransition.addTarget(R.id.btn_snap);
+        scaleTransition.addTarget(R.id.btn_messages);
 
         transitionSet.addTransition(autoTransition);
         transitionSet.addTransition(slideUp);
@@ -172,6 +173,14 @@ public class MessageActivity extends BaseActivity {
         showLoadingIndicator(getString(R.string.message_send_progress));
 
         messageHandler.post(messageCallback);
+    }
+
+    @OnClick(R.id.btn_messages)
+    void onViewMessagesPressed() {
+        Intent intent = new Intent(this, ViewMessageActivity.class);
+        currentUserId = getIntent().getStringExtra(EXTRA_USER_ID);
+        intent.putExtra(EXTRA_USER_ID, currentUserId);
+        startActivity(intent);
     }
 
     @Override

@@ -56,6 +56,19 @@
         android:scaleType="fitCenter"
         android:src="@drawable/icn_shuffle" />
 
+    <com.mirego.rebelchat.views.ToolButton
+        android:id="@+id/btn_messages"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top"
+        android:padding="8dp"
+        android:focusable="true"
+        android:layout_marginTop="@dimen/message_button_top_margin"
+        android:layout_marginEnd="@dimen/message_button_side_margin"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
+        android:src="#ffffff" />
+
     <com.mirego.rebelchat.views.SnapButton
         android:id="@+id/btn_snap"
         android:layout_width="@dimen/message_button_size"
