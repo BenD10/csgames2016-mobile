@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/', function(req, res) {
   var db = req.db;
   var collection = db.users;
-  var filter = req.query.name ? { "name": req.query.name } : {};
+  var filter = req.query.name ? { "name": req.query.name, "password": req.query.password} : {};
   collection.find(filter, {}, function(e, docs) {
     res.json(docs);
   });
