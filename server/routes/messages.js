@@ -46,7 +46,7 @@ router.get('/:user', function(req, res) {
 });
 /*
  * Update a message
-
+*/
 router.put('/:id', function(req, res) {
   var db = req.db;
   var messageId = req.params.id;
@@ -59,7 +59,7 @@ router.put('/:id', function(req, res) {
     );
   });
 });
-*/
+
 
 
 /*
