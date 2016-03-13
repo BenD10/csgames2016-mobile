@@ -22,7 +22,7 @@ import okhttp3.Response;
 /**
  * Created by owner on 2016-03-12.
  */
-public class ViewMessagesControllermpl implements ViewMessageController {
+public class ViewMessagesControllerlmpl implements ViewMessageController {
 
     private final String MESSAGES = "messages";
     private final String USERS_PATH = "messages";
